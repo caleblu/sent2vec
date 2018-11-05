@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import sys
-from nltk.tokenize import StanfordTokenizer
+from nltk.tokenize.stanford import StanfordTokenizer
 import re
 import os
 
@@ -50,7 +50,7 @@ def tokenize_sentences(tknzr, sentences, to_lower=True):
 
 fileName = sys.argv[1]
 
-SNLP_TAGGER_JAR = "/home/pgupta/stanford-postagger.jar"
+SNLP_TAGGER_JAR = "./stanford-postagger.jar"
 
 
 sentences = []

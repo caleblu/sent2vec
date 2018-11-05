@@ -1,10 +1,12 @@
 import glob
 from multiprocessing import Pool
 import sys
-from nltk import TweetTokenizer
 import os
 import re
 import codecs
+import nltk.data
+from nltk.tokenize import TweetTokenizer
+tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
 def preprocess_tweet(tweet):
     tweet = tweet.lower()
@@ -22,16 +24,13 @@ def tokenize_tweets(filename, dest_folder):
     print("processing %s" % basename)
     tknzr = TweetTokenizer()
     with codecs.open(dest, 'w', "utf-8") as out_fs:
-        with open(filename, 'r', encoding="utf-8") as in_fs:
-            for line in in_fs:
-with codecs.open(dest, 'w', "utf-8") as out_fs:
-        with open(filename, 'r', encoding="utf-8") as in_fs:
-            lines = in_fs.readlines()
-            data = ' '.join(lines).replace('\n','')
-            tokenized_data = tokenizer.tokenize(data)
-            for line in tokenized_data:
-                print(' '.join(tknzr.tokenize(line)))
-                out_fs.write(id+'\t'+timestamp+'\t'+username+'\t'+tweet+'\n')
+            with open(filename, 'r', encoding="utf-8") as in_fs:
+                lines = in_fs.readlines()
+                data = ' '.join(lines).replace('\n','')
+                tokenized_data = tokenizer.tokenize(data)
+                for line in tokenized_data:
+                    # print(' '.join(tknzr.tokenize(line)))
+                    out_fs.write(' '.join(tknzr.tokenize(line)).lower() + '\n')
 
 def main():
     if len(sys.argv) != 4:

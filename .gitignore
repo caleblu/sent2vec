@@ -27,3 +27,7 @@
 *.exe
 *.out
 *.app
+*.jar
+fasttext
+gdown.pl
+book*
